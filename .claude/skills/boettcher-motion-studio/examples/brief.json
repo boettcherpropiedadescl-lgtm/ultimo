@@ -1,0 +1,12 @@
+{
+  "objective": "captacion_propietarios",
+  "format": "reel_9_16",
+  "durationSeconds": 18,
+  "fps": 30,
+  "headline": "¿SU DEPTO SIGUE VACÍO?",
+  "subheadline": "Conversemos sobre una estrategia de arriendo para su propiedad.",
+  "cta": "Escríbanos | Boettcher Propiedades",
+  "assets": {"logo": "REEMPLAZAR_CON_LOGO_AUTORIZADO", "music": "OPCIONAL_CON_LICENCIA", "propertyClips": []},
+  "tone": "directo, moderno, confiable",
+  "status": "demo_con_datos_por_confirmar"
+}
