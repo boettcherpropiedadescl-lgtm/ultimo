@@ -1,0 +1,17 @@
+<speak version="1.0" xmlns="http://www.w3.org/2001/10/synthesis" xml:lang="es-CL">
+  <voice name="es-CL-LorenzoNeural">
+    <prosody rate="-4%" pitch="-3%">
+      ¿Su depto sigue vacío?
+      <break time="450ms"/>
+      Cada semana sin arriendo es una oportunidad que se pierde.
+      <break time="400ms"/>
+      En Boettcher Propiedades, nos encargamos de la publicación,
+      <break time="200ms"/>
+      las visitas coordinadas
+      <break time="200ms"/>
+      y la evaluación de los interesados.
+      <break time="450ms"/>
+      Conversemos sobre una estrategia de arriendo para su propiedad.
+    </prosody>
+  </voice>
+</speak>
