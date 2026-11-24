@@ -104,7 +104,7 @@ export const Shield: React.FC<{width?: number}> = ({width = 300}) => {
 };
 
 // Skyline inferior con ventanas que se encienden y apagan. warmAt: fotograma desde el que se vuelve cálido.
-export const Skyline: React.FC<{warmAt: number}> = ({warmAt}) => {
+export const Skyline: React.FC<{warmAt: number; fast?: boolean}> = ({warmAt, fast = false}) => {
   const f = useCurrentFrame();
   const tint = interpolateColors(f, [warmAt - 14, warmAt + 14], ["#7fa0c0", "#ffcf6e"]);
   const body = interpolateColors(f, [warmAt - 14, warmAt + 14], ["#161c26", "#1d1b1a"]);
@@ -125,7 +125,7 @@ export const Skyline: React.FC<{warmAt: number}> = ({warmAt}) => {
             <rect x={b.x} y={380 - b.h} width={b.w} height={b.h} fill={body} />
             {Array.from({length: Math.floor(b.h / 34)}).map((_, r) =>
               Array.from({length: Math.floor(b.w / 28)}).map((__, c) => {
-                const on = hash(i * 97 + r * 13 + c * 7 + Math.floor((f + i * 11) / 55)) > 0.62;
+                const on = hash(i * 97 + r * 13 + c * 7 + Math.floor((f + i * 11) / (fast ? 18 : 55))) > 0.62;
                 return <rect key={`${r}-${c}`} x={b.x + 10 + c * 28} y={380 - b.h + 14 + r * 34} width={14} height={18} rx={2} fill={tint} opacity={on ? 0.85 : 0.08} />;
               }),
             )}
@@ -148,6 +148,24 @@ export const Bokeh: React.FC<{warmAt: number}> = ({warmAt}) => {
         const y = hash(i + 50) * 1920 + Math.cos(f / (70 + i * 5) + i * 2) * 90;
         return <div key={i} style={{position: "absolute", left: x - size / 2, top: y - size / 2, width: size, height: size, borderRadius: "50%",
           background: `radial-gradient(circle, ${c}33 0%, transparent 65%)`, opacity: 0.45 + 0.25 * Math.sin(f / 40 + i)}} />;
+      })}
+    </div>
+  );
+};
+
+// Brasas que suben lentamente por todo el cuadro: movimiento continuo sin tocar el texto.
+export const Embers: React.FC<{warmAt: number; count?: number}> = ({warmAt, count = 34}) => {
+  const f = useCurrentFrame();
+  const c = interpolateColors(f, [warmAt - 14, warmAt + 14], ["#9fc0e0", "#ffc978"]);
+  return (
+    <div style={{position: "absolute", inset: 0, pointerEvents: "none"}}>
+      {Array.from({length: count}).map((_, i) => {
+        const size = 5 + hash(i + 3) * 11;
+        const speed = 1.2 + hash(i + 17) * 2.4;
+        const y = 1960 - (((f * speed + hash(i + 31) * 2200) % 2200));
+        const x = hash(i + 7) * 1080 + Math.sin(f / (40 + i * 3) + i) * 34;
+        return <div key={i} style={{position: "absolute", left: x, top: y, width: size, height: size, borderRadius: "50%", background: c,
+          opacity: 0.22 + 0.3 * (0.5 + 0.5 * Math.sin(f / 18 + i))}} />;
       })}
     </div>
   );

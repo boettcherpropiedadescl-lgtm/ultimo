@@ -5,6 +5,7 @@ import {calculateVoiceOverMetadata, VoiceOverReel, voiceOverDefaults} from "./Vo
 import {BoettcherComercial45, calculateComercialMetadata, comercialDefaults} from "./BoettcherComercial45";
 import {BoettcherComercial60, calculateComercial60Metadata, comercial60Defaults} from "./BoettcherComercial60";
 import {BoettcherComercialFinal, calculateFinalMetadata, finalDefaults} from "./BoettcherComercialFinal";
+import {BoettcherComercialDinamico, calculateDinamicoMetadata, dinamicoDefaults} from "./BoettcherComercialDinamico";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -57,6 +58,16 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         defaultProps={finalDefaults}
         calculateMetadata={calculateFinalMetadata}
+      />
+      <Composition
+        id="BoettcherComercialDinamico"
+        component={BoettcherComercialDinamico}
+        durationInFrames={1710}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={dinamicoDefaults}
+        calculateMetadata={calculateDinamicoMetadata}
       />
     </>
   );

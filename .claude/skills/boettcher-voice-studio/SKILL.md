@@ -40,6 +40,9 @@ Si el cliente entrega su propia grabación (p. ej. `.mov` con video negro y solo
 ## Regla anti-parpadeo en Remotion
 No uses `filter: blur()` ni `rotateX`/`perspective` por palabra: Chrome puede ocultar una palabra durante un fotograma. Usa `components/StableText` (solo opacidad y desplazamiento, estilo vacío al terminar) y aplica transform/opacity únicamente mientras algo se mueve.
 
+## Estilo de montaje "dinámico" (composición BoettcherComercialDinamico)
+Inspirado en reels de tutoriales: cada escena es una tarjeta tipo interfaz que entra con rebote y sale mientras entra la siguiente; cursor que hace clic, interruptores, contadores, esqueletos de carga, confeti y subtítulos palabra por palabra (usa `words` del timeline). Piezas en `src/components/ui/Kit.tsx`. Para mantener la atención hay movimiento permanente sin tocar el texto con filtros: destello en tarjetas, brasas, empuje de cámara lento por escena. Mide siempre: fotogramas sin cambio = 0, sin bandas negras, sin picos aislados en titulares/subtítulos. No copiar mascotas, logos ni material de terceros del video de referencia.
+
 ## Comandos
 ```bash
 export VOICE_STUDIO_HOME=/home/user/boettcher-private
