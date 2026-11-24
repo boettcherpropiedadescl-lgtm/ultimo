@@ -1,4 +1,4 @@
-import {AbsoluteFill, Audio, Easing, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig} from "remotion";
+import {AbsoluteFill, Audio, Easing, Img, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig} from "remotion";
 import {GlobalBackground} from "./components/GlobalBackground";
 import {SafeArea} from "./components/SafeArea";
 import {StableText} from "./components/StableText";
@@ -169,12 +169,19 @@ const PhaseD: React.FC<PhaseProps> = ({tl, base}) => {
         borderRadius: 999, padding: "30px 60px", boxShadow: `0 20px 50px ${colors.copper}55`, ...enter(btn, 0, 40)}}>
         Solicita tu evaluación
       </div>
-      <div style={{marginTop: 50, ...enter(info, 0, 20)}}>
-        <div style={{fontFamily, fontWeight: 900, fontSize: 46, letterSpacing: 8, color: colors.white}}>BOETTCHER PROPIEDADES</div>
-        <div style={{height: 4, width: 240, background: colors.copper, marginTop: 14}} />
-        <div style={{marginTop: 22, fontFamily, fontSize: 36, color: colors.muted}}>WhatsApp: [número por confirmar]</div>
-        <div style={{marginTop: 20, width: 460, height: 110, border: `3px dashed ${colors.muted}`, borderRadius: 16, display: "flex", alignItems: "center",
-          justifyContent: "center", fontFamily, fontSize: 28, color: colors.muted}}>[LOGOTIPO OFICIAL POR CONFIRMAR]</div>
+      <div style={{marginTop: 46, display: "flex", alignItems: "center", gap: 26, ...enter(info, 0, 20)}}>
+        <svg width={92} height={92} viewBox="0 0 24 24" aria-label="WhatsApp">
+          <circle cx="12" cy="12" r="12" fill="#25D366" />
+          <path fill="#ffffff" transform="translate(4.2 4.2) scale(0.65)"
+            d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.02-.24c1.12.37 2.33.57 3.57.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.45.57 3.57a1 1 0 0 1-.25 1.02l-2.2 2.2z" />
+        </svg>
+        <div>
+          <div style={{fontFamily, fontWeight: 700, fontSize: 32, letterSpacing: 3, color: colors.muted}}>ESCRÍBENOS POR WHATSAPP</div>
+          <div style={{fontFamily, fontWeight: 900, fontSize: 62, color: colors.white, lineHeight: 1.05, whiteSpace: "nowrap", fontVariantNumeric: "tabular-nums"}}>+56 9 8687 7420</div>
+        </div>
+      </div>
+      <div style={{marginTop: 40, width: 660, borderRadius: 24, overflow: "hidden", border: "2px solid rgba(255,255,255,0.18)", ...enter(info, 0, 20)}}>
+        <Img src={staticFile("brand/logo-boettcher.png")} style={{display: "block", width: "100%", height: "auto"}} />
       </div>
     </SafeArea>
   );
