@@ -3,7 +3,7 @@ import {GlobalBackground} from "./components/GlobalBackground";
 import {StableText} from "./components/StableText";
 import {Bokeh, Embers, LightBackground, Skyline} from "./components/art/Scenery";
 import {Burst, Card, clamp, Cross, Cursor, enter, HEADER_H, rev} from "./components/ui/Kit";
-import {Captions, Chips, KEYWORDS, SceneFrame, TopLogo, type SP, type Timeline} from "./BoettcherComercialDinamico";
+import {Captions, Chips, KEYWORDS, SceneFrame, type SP, type Timeline} from "./BoettcherComercialDinamico";
 import {fontFamily} from "./theme";
 import {darkTheme, lightTheme, ThemeCtx, useTheme} from "./theme-context";
 
@@ -344,7 +344,6 @@ export const BoettcherComercialCambio: React.FC<CambioProps> = ({timeline, audio
           <Embers warmAt={c("change")} />
         </>
       )}
-      <TopLogo hideAt={c("invest")} />
       <Chips marks={[0, c("change"), c("broker"), c("write")]} total={TOTAL} labels={["HOY", "EL CAMBIO", "BENEFICIOS", "COTIZA"]} />
       <div style={{position: "absolute", left: STAGE.left, top: STAGE.top, width: STAGE.width, height: STAGE.height}}>
         {scenes.map((Scene, i) => {
