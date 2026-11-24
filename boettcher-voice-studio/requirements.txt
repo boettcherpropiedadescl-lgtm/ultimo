@@ -1,0 +1,8 @@
+# Motor local (Chatterbox Multilingual, MIT). Probado con Python 3.13 en CPU.
+chatterbox-tts==0.1.7
+# resemble-perth importa pkg_resources; setuptools 81+ lo retiró.
+setuptools<81
+# Verificación de inteligibilidad (opcional).
+faster-whisper==1.2.1
+av>=14,<16
+pytest

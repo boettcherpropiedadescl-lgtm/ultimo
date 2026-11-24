@@ -1,0 +1,16 @@
+# Nunca versionar voces, grabaciones, perfiles, pesos ni audios generados.
+recordings/
+profiles/
+models/
+out/
+*.wav
+*.mp3
+*.mp2
+*.mp4
+*.pt
+*.safetensors
+*.npy
+.venv/
+venv/
+__pycache__/
+.pytest_cache/
