@@ -3,6 +3,7 @@ import {BoettcherReel} from "./BoettcherReel";
 import {defaultReelProps} from "./props";
 import {calculateVoiceOverMetadata, VoiceOverReel, voiceOverDefaults} from "./VoiceOverReel";
 import {BoettcherComercial45, calculateComercialMetadata, comercialDefaults} from "./BoettcherComercial45";
+import {BoettcherComercial60, calculateComercial60Metadata, comercial60Defaults} from "./BoettcherComercial60";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -35,6 +36,16 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         defaultProps={comercialDefaults}
         calculateMetadata={calculateComercialMetadata}
+      />
+      <Composition
+        id="BoettcherComercial60"
+        component={BoettcherComercial60}
+        durationInFrames={1800}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={comercial60Defaults}
+        calculateMetadata={calculateComercial60Metadata}
       />
     </>
   );

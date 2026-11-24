@@ -29,6 +29,11 @@ Módulo en `boettcher-voice-studio/` del repositorio. Motor: Chatterbox Multilin
 
 Ritmo medido de la voz de referencia: ≈0,6–0,9 s por palabra. Un guion de 45 s debe tener unas 75 palabras como máximo.
 
+## Narración continua con cues (comerciales con gráficas sincronizadas)
+`scenes/comercial60.json` define `beats` (frases) y `cues` (frases-clave que disparan gráficas). `python -m voice_studio.build_narration scenes/comercial60.json --remotion-public ../boettcher-videos/public`:
+genera voz sin relleno, comprime pausas largas a ≈0,14 s, alinea el guion palabra a palabra con reconocimiento local y escribe `public/voice/<nombre>.timeline.json` (`cues`, `subtitles`). La composición `BoettcherComercial60` usa esos cues. `--reuse-wav` repite solo compresión y alineación.
+Datos comerciales: solo los de boettcher.cl/administracion-de-propiedades/ (planes 6/12/15 %, seguro hasta 6 y 12 meses según plan, Ley 21.461, +15 años, +2.000 propiedades).
+
 ## Comandos
 ```bash
 export VOICE_STUDIO_HOME=/home/user/boettcher-private

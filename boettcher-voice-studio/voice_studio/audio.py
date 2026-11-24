@@ -72,3 +72,11 @@ def export(src: Path, dst: Path) -> Path:
     else:
         _ff(["-i", str(src), "-c:a", "pcm_s16le", str(dst)])
     return dst
+
+
+def tighten_silences(src: Path, dst: Path, min_silence_s: float = 0.22, keep_s: float = 0.14, threshold_db: int = -38) -> Path:
+    """Reduce pausas largas (p. ej. colas del modelo) a keep_s, sin tocar la voz."""
+    _ff(["-i", str(src), "-af",
+         f"silenceremove=stop_periods=-1:stop_duration={min_silence_s}:stop_threshold={threshold_db}dB:stop_silence={keep_s}",
+         "-c:a", "pcm_s16le", str(dst)])
+    return dst
