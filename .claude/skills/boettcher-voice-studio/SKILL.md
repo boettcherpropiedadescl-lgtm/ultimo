@@ -46,6 +46,9 @@ Inspirado en reels de tutoriales: cada escena es una tarjeta tipo interfaz que e
 ## Comercial «cambia de administración» (BoettcherComercialCambio)
 Guion y cues en `scenes/cambio_admin.json` (`beats` para la voz, `display_script` con cifras para subtítulos, `cues`). Narración provisional: `python -m voice_studio.build_narration scenes/cambio_admin.json --remotion-public ../boettcher-videos/public`. **Para usar la voz final del cliente**: extraer su audio a `public/voice/cambio-admin.wav` y regenerar `cambio-admin.timeline.json` con `python -m voice_studio.align_audio audio.wav scenes/cambio_admin.json public/voice/cambio-admin.timeline.json`; la composición se reajusta sola. No afirmar porcentajes de cartera que el cliente no haya entregado.
 
+## Modelos visuales (temas) del comercial de cambio
+`BoettcherComercialCambio` acepta `theme: "dark" | "light"` y `audioName` (audio real en `public/voice/<nombre>.wav` + `<nombre>.timeline.json`). Paletas en `src/theme-context.tsx`: la oscura reproduce la línea aprobada (grafito + cobre); la clara usa los colores del logo (azul #010a4f, dorado #face04) sobre crema y el logo con placa azul. Composiciones registradas: `BoettcherCambioClaro` y `BoettcherCambioOscuro` (audio `cambio-final`). Para un modelo nuevo basta otra paleta y, si hace falta, otro fondo (`LightBackground` en `components/art/Scenery.tsx`). Ante cualquier cambio de paleta, comparar un fotograma del video oscuro aprobado (PSNR > 35 dB) para no romper lo ya aprobado.
+
 ## Comandos
 ```bash
 export VOICE_STUDIO_HOME=/home/user/boettcher-private

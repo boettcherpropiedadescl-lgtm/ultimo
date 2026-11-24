@@ -104,10 +104,10 @@ export const Shield: React.FC<{width?: number}> = ({width = 300}) => {
 };
 
 // Skyline inferior con ventanas que se encienden y apagan. warmAt: fotograma desde el que se vuelve cálido.
-export const Skyline: React.FC<{warmAt: number; fast?: boolean}> = ({warmAt, fast = false}) => {
+export const Skyline: React.FC<{warmAt: number; fast?: boolean; bodyColor?: string; tintColor?: string}> = ({warmAt, fast = false, bodyColor, tintColor}) => {
   const f = useCurrentFrame();
-  const tint = interpolateColors(f, [warmAt - 14, warmAt + 14], ["#7fa0c0", "#ffcf6e"]);
-  const body = interpolateColors(f, [warmAt - 14, warmAt + 14], ["#161c26", "#1d1b1a"]);
+  const tint = tintColor ?? interpolateColors(f, [warmAt - 14, warmAt + 14], ["#7fa0c0", "#ffcf6e"]);
+  const body = bodyColor ?? interpolateColors(f, [warmAt - 14, warmAt + 14], ["#161c26", "#1d1b1a"]);
   const buildings: {x: number; w: number; h: number}[] = [];
   let x = -20;
   for (let i = 0; x < 1100; i++) {
@@ -154,9 +154,9 @@ export const Bokeh: React.FC<{warmAt: number}> = ({warmAt}) => {
 };
 
 // Brasas que suben lentamente por todo el cuadro: movimiento continuo sin tocar el texto.
-export const Embers: React.FC<{warmAt: number; count?: number}> = ({warmAt, count = 34}) => {
+export const Embers: React.FC<{warmAt: number; count?: number; color?: string; strength?: number}> = ({warmAt, count = 34, color, strength = 1}) => {
   const f = useCurrentFrame();
-  const c = interpolateColors(f, [warmAt - 14, warmAt + 14], ["#9fc0e0", "#ffc978"]);
+  const c = color ?? interpolateColors(f, [warmAt - 14, warmAt + 14], ["#9fc0e0", "#ffc978"]);
   return (
     <div style={{position: "absolute", inset: 0, pointerEvents: "none"}}>
       {Array.from({length: count}).map((_, i) => {
@@ -165,8 +165,24 @@ export const Embers: React.FC<{warmAt: number; count?: number}> = ({warmAt, coun
         const y = 1960 - (((f * speed + hash(i + 31) * 2200) % 2200));
         const x = hash(i + 7) * 1080 + Math.sin(f / (40 + i * 3) + i) * 34;
         return <div key={i} style={{position: "absolute", left: x, top: y, width: size, height: size, borderRadius: "50%", background: c,
-          opacity: 0.22 + 0.3 * (0.5 + 0.5 * Math.sin(f / 18 + i))}} />;
+          opacity: strength * (0.22 + 0.3 * (0.5 + 0.5 * Math.sin(f / 18 + i)))}} />;
       })}
+    </div>
+  );
+};
+
+// Fondo claro (crema) con luces suaves en movimiento, partículas y skyline pálido: el modelo "claro" del comercial.
+export const LightBackground: React.FC = () => {
+  const f = useCurrentFrame();
+  const x1 = 28 + Math.sin(f / 70) * 18, y1 = 24 + Math.cos(f / 90) * 10;
+  const x2 = 74 + Math.cos(f / 80) * 16, y2 = 60 + Math.sin(f / 60) * 12;
+  const push = 1 + 0.06 * Math.min(1, f / 1700);
+  return (
+    <div style={{position: "absolute", inset: 0, overflow: "hidden", background: "linear-gradient(170deg, #fdf8ee 0%, #f3e9d7 100%)"}}>
+      <div style={{position: "absolute", inset: 0, transform: `scale(${push})`,
+        background: `radial-gradient(circle at ${x1}% ${y1}%, rgba(242,183,5,0.30) 0%, transparent 46%), radial-gradient(circle at ${x2}% ${y2}%, rgba(60,80,200,0.14) 0%, transparent 52%)`}} />
+      <Embers warmAt={0} color="#0b1240" strength={0.55} count={26} />
+      <Skyline warmAt={0} fast bodyColor="#e1e5f3" tintColor="#f2b705" />
     </div>
   );
 };

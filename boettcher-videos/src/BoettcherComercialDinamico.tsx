@@ -5,6 +5,7 @@ import {StableText} from "./components/StableText";
 import {Bokeh, Embers, Shield, Skyline} from "./components/art/Scenery";
 import {Burst, Card, clamp, Cross, Cursor, enter, HEADER_H, rev, Skeleton, Toggle} from "./components/ui/Kit";
 import {colors, fontFamily} from "./theme";
+import {useTheme} from "./theme-context";
 
 // Comercial dinámico: cada escena es una tarjeta tipo interfaz que entra con rebote y sale mientras entra la siguiente, con cursor,
 // interruptores, contadores y confeti disparados por cues del audio real (public/voice/comercial-final.wav). Subtítulos palabra por palabra.
@@ -374,17 +375,18 @@ const S7: React.FC<SP> = ({lc}) => {
 // ───────── Guía de avance (como los "PASO 1/2/3" del reel de referencia): 4 etapas con barra que se llena.
 export const Chips: React.FC<{marks: number[]; total: number; labels?: string[]}> = ({marks, total, labels = ["PROBLEMA", "SOLUCIÓN", "PLANES", "CONTACTO"]}) => {
   const f = useCurrentFrame();
+  const T = useTheme();
   return (
     <div style={{position: "absolute", left: 84, right: 84, top: 214, display: "flex", gap: 10}}>
       {labels.map((l, i) => {
         const s = marks[i], e = i + 1 < marks.length ? marks[i + 1] : total;
         const p = Math.max(0, Math.min(1, (f - s) / Math.max(1, e - s)));
         return (
-          <div key={l} style={{flex: 1, height: 46, borderRadius: 23, position: "relative", overflow: "hidden", background: "rgba(255,255,255,0.08)",
-            border: `2px solid ${f >= s ? colors.copper : "rgba(255,255,255,0.14)"}`}}>
-            <div style={{position: "absolute", left: 0, top: 0, bottom: 0, width: `${p * 100}%`, background: colors.copper, opacity: 0.9}} />
+          <div key={l} style={{flex: 1, height: 46, borderRadius: 23, position: "relative", overflow: "hidden", background: T.chipBg,
+            border: `2px solid ${f >= s ? T.accent : T.chipBorder}`}}>
+            <div style={{position: "absolute", left: 0, top: 0, bottom: 0, width: `${p * 100}%`, background: T.accent, opacity: 0.9}} />
             <div style={{position: "relative", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", fontFamily, fontWeight: 800, fontSize: 21, letterSpacing: 2,
-              color: p > 0.5 ? colors.graphiteDeep : f >= s ? colors.white : colors.muted}}>{l}</div>
+              color: p > 0.5 ? T.onAccent : f >= s ? T.text : T.muted}}>{l}</div>
           </div>
         );
       })}
@@ -394,11 +396,12 @@ export const Chips: React.FC<{marks: number[]; total: number; labels?: string[]}
 
 export const TopLogo: React.FC<{hideAt: number}> = ({hideAt}) => {
   const f = useCurrentFrame();
+  const T = useTheme();
   const o = Math.min(interpolate(f, [0, 14], [0, 1], clamp), interpolate(f, [hideAt - 10, hideAt + 4], [1, 0], clamp));
   if (o <= 0) return null;
   return (
     <div style={{position: "absolute", top: 96, left: 0, width: 1080, display: "flex", justifyContent: "center", ...(o >= 1 ? {} : {opacity: o})}}>
-      <Img src={staticFile("brand/logo-boettcher-transparente.png")} style={{width: 400, height: "auto", display: "block"}} />
+      <Img src={staticFile(T.logo)} style={{width: T.logoTopWidth, height: "auto", display: "block"}} />
     </div>
   );
 };
@@ -409,6 +412,7 @@ export const KEYWORDS = new Set(["pagar", "millones", "abogados", "boettcher", "
 
 export const Captions: React.FC<{tl: Timeline | null; keywords?: Set<string>}> = ({tl, keywords = KEYWORDS}) => {
   const f = useCurrentFrame();
+  const T = useTheme();
   const t = f / FPS;
   const chunks = useMemo(() => {
     let idx = 0;
@@ -423,7 +427,7 @@ export const Captions: React.FC<{tl: Timeline | null; keywords?: Set<string>}> =
   if (!tl || !active) return null;
   const words = tl.words.slice(active.from, active.from + active.n);
   return (
-    <div style={{position: "absolute", left: 70, right: 70, bottom: 430, boxSizing: "border-box", padding: "18px 28px", borderRadius: 22, background: "rgba(13,15,18,0.80)", textAlign: "center",
+    <div style={{position: "absolute", left: 70, right: 70, bottom: 430, boxSizing: "border-box", padding: "18px 28px", borderRadius: 22, background: T.capBg, textAlign: "center",
       fontFamily, fontWeight: 800, fontSize: 54, lineHeight: 1.22}}>
       {words.map((w, i) => {
         const spoken = t >= w.start;
@@ -431,7 +435,7 @@ export const Captions: React.FC<{tl: Timeline | null; keywords?: Set<string>}> =
         const current = spoken && t < next;
         const key = keywords.has(norm(w.w));
         return (
-          <span key={i} style={{opacity: spoken ? 1 : 0, color: current ? colors.copper : key ? colors.copperSoft : colors.white}}>{w.w + " "}</span>
+          <span key={i} style={{opacity: spoken ? 1 : 0, color: current ? T.capCurrent : key ? T.capKey : T.capText}}>{w.w + " "}</span>
         );
       })}
     </div>

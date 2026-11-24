@@ -80,6 +80,26 @@ export const RemotionRoot: React.FC = () => {
         defaultProps={cambioDefaults}
         calculateMetadata={calculateCambioMetadata}
       />
+      <Composition
+        id="BoettcherCambioClaro"
+        component={BoettcherComercialCambio}
+        durationInFrames={1600}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{...cambioDefaults, audioName: "cambio-final", theme: "light" as const}}
+        calculateMetadata={calculateCambioMetadata}
+      />
+      <Composition
+        id="BoettcherCambioOscuro"
+        component={BoettcherComercialCambio}
+        durationInFrames={1600}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={{...cambioDefaults, audioName: "cambio-final", theme: "dark" as const}}
+        calculateMetadata={calculateCambioMetadata}
+      />
     </>
   );
 };

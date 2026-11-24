@@ -1,5 +1,6 @@
 import {Easing, interpolate, interpolateColors, useCurrentFrame} from "remotion";
-import {colors, fontFamily} from "../../theme";
+import {fontFamily} from "../../theme";
+import {useTheme} from "../../theme-context";
 
 // Piezas de interfaz animadas (tarjeta con ventana, interruptor, visto, cursor con clic, confeti). Lenguaje de movimiento inspirado en
 // reels de tutoriales: tarjetas que entran con rebote, interruptores que se encienden, cursor que hace clic y subtítulos por palabra.
@@ -20,30 +21,35 @@ export const HEADER_H = 70;
 // Tarjeta con barra de ventana. El cuerpo es position:relative para colocar el contenido en coordenadas conocidas.
 const Shine: React.FC = () => {
   const f = useCurrentFrame();
+  const T = useTheme();
   const x = ((f * 9) % 1500) - 320;
   return <div style={{position: "absolute", left: x, top: 0, bottom: 0, width: 220, transform: "skewX(-20deg)", pointerEvents: "none",
-    background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.08), transparent)"}} />;
+    background: `linear-gradient(90deg, transparent, ${T.shine}, transparent)`}} />;
 };
 
-export const Card: React.FC<{title?: string; height: number; accent?: string; children?: React.ReactNode; style?: React.CSSProperties}> = ({title, height, accent, children, style}) => (
-  <div style={{position: "relative", height, boxSizing: "border-box", borderRadius: 36, background: "rgba(22,25,31,0.97)", border: `2px solid ${accent ?? "rgba(255,255,255,0.14)"}`,
-    boxShadow: "0 30px 80px rgba(0,0,0,0.55)", overflow: "hidden", ...style}}>
-    <div style={{height: HEADER_H, boxSizing: "border-box", display: "flex", alignItems: "center", gap: 10, padding: "0 26px", background: "rgba(255,255,255,0.05)",
-      borderBottom: "1px solid rgba(255,255,255,0.08)"}}>
-      {["#ff5f57", "#febc2e", "#28c840"].map((c) => <span key={c} style={{width: 16, height: 16, borderRadius: 8, background: c, display: "inline-block"}} />)}
-      {title ? <span style={{marginLeft: 16, fontFamily, fontWeight: 800, fontSize: 24, letterSpacing: 3, color: colors.muted}}>{title}</span> : null}
+export const Card: React.FC<{title?: string; height: number; accent?: string; children?: React.ReactNode; style?: React.CSSProperties}> = ({title, height, accent, children, style}) => {
+  const T = useTheme();
+  return (
+    <div style={{position: "relative", height, boxSizing: "border-box", borderRadius: 36, background: T.card, border: `2px solid ${accent ?? T.cardBorder}`,
+      boxShadow: T.cardShadow, overflow: "hidden", ...style}}>
+      <div style={{height: HEADER_H, boxSizing: "border-box", display: "flex", alignItems: "center", gap: 10, padding: "0 26px", background: T.headerBg,
+        borderBottom: `1px solid ${T.headerBorder}`}}>
+        {["#ff5f57", "#febc2e", "#28c840"].map((c) => <span key={c} style={{width: 16, height: 16, borderRadius: 8, background: c, display: "inline-block"}} />)}
+        {title ? <span style={{marginLeft: 16, fontFamily, fontWeight: 800, fontSize: 24, letterSpacing: 3, color: T.muted}}>{title}</span> : null}
+      </div>
+      <div style={{position: "relative", height: height - HEADER_H}}>{children}</div>
+      <Shine />
     </div>
-    <div style={{position: "relative", height: height - HEADER_H}}>{children}</div>
-    <Shine />
-  </div>
-);
+  );
+};
 
 export const Toggle: React.FC<{at: number; x: number; y: number}> = ({at, x, y}) => {
   const f = useCurrentFrame();
+  const T = useTheme();
   const p = interpolate(f, [at, at + 8], [0, 1], {...clamp, easing: Easing.out(Easing.cubic)});
   const w = 104, h = 56;
   return (
-    <div style={{position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h, borderRadius: h / 2, background: interpolateColors(p, [0, 1], ["#454c58", "#3ecf8e"])}}>
+    <div style={{position: "absolute", left: x - w / 2, top: y - h / 2, width: w, height: h, borderRadius: h / 2, background: interpolateColors(p, [0, 1], [T.toggleOff, "#3ecf8e"])}}>
       <div style={{position: "absolute", top: 6, left: 6 + p * (w - h), width: h - 12, height: h - 12, borderRadius: "50%", background: "#fff"}} />
     </div>
   );
@@ -74,9 +80,10 @@ export const Cross: React.FC<{at: number; size?: number}> = ({at, size = 56}) =>
 // Confeti o monedas que salen de un punto y caen con gravedad.
 export const Burst: React.FC<{at: number; x: number; y: number; count?: number; coins?: boolean; up?: boolean}> = ({at, x, y, count = 26, coins = false, up = false}) => {
   const f = useCurrentFrame();
+  const T = useTheme();
   const t = f - at;
   if (t < 0 || t > 70) return null;
-  const palette = [colors.copper, colors.copperSoft, "#f5c542", "#ffffff", "#3ecf8e"];
+  const palette = T.confetti;
   return (
     <svg width={1080} height={1920} style={{position: "absolute", left: 0, top: 0, overflow: "visible", pointerEvents: "none"}}>
       {Array.from({length: count}).map((_, i) => {
@@ -103,6 +110,7 @@ export type CursorPt = {at: number; x: number; y: number; click?: boolean};
 // Cursor que recorre puntos en coordenadas de pantalla y hace clic (anillo) en los marcados.
 export const Cursor: React.FC<{pts: CursorPt[]}> = ({pts}) => {
   const f = useCurrentFrame();
+  const T = useTheme();
   let i = 0;
   pts.forEach((p, k) => { if (f >= p.at) i = k; });
   const a = pts[i];
@@ -116,7 +124,7 @@ export const Cursor: React.FC<{pts: CursorPt[]}> = ({pts}) => {
     <div style={{position: "absolute", left: 0, top: 0, pointerEvents: "none"}}>
       {ripple.map(({p, t}, k) => (
         <div key={k} style={{position: "absolute", left: p.x - 30 * (t / 18) - 8, top: p.y - 30 * (t / 18) - 8, width: 60 * (t / 18) + 16, height: 60 * (t / 18) + 16, borderRadius: "50%",
-          border: `4px solid ${colors.copperSoft}`, opacity: 1 - t / 18}} />
+          border: `4px solid ${T.accentText}`, opacity: 1 - t / 18}} />
       ))}
       <svg width={54} height={64} viewBox="0 0 27 32" style={{position: "absolute", left: x - 4, top: y - 4, filter: "drop-shadow(0 4px 6px rgba(0,0,0,0.5))"}}>
         <path d="M3 2 L3 24 L9 18 L14 29 L18 27 L13 17 L22 17 Z" fill="#ffffff" stroke="#111" strokeWidth="2" strokeLinejoin="round" />
@@ -128,10 +136,11 @@ export const Cursor: React.FC<{pts: CursorPt[]}> = ({pts}) => {
 // Marcador de carga con brillo que recorre (como las interfaces mientras llega el contenido): evita cuerpos de tarjeta vacíos.
 export const Skeleton: React.FC<{x: number; y: number; w: number; h: number; radius?: number}> = ({x, y, w, h, radius = 24}) => {
   const f = useCurrentFrame();
+  const T = useTheme();
   const sh = ((f * 16) % (w + 320)) - 160;
   return (
-    <div style={{position: "absolute", left: x, top: y, width: w, height: h, borderRadius: radius, background: "rgba(255,255,255,0.06)", overflow: "hidden", border: "2px solid rgba(255,255,255,0.08)", boxSizing: "border-box"}}>
-      <div style={{position: "absolute", left: sh, top: 0, width: 160, height: "100%", background: "linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent)"}} />
+    <div style={{position: "absolute", left: x, top: y, width: w, height: h, borderRadius: radius, background: T.skeleton, overflow: "hidden", border: `2px solid ${T.skeletonBorder}`, boxSizing: "border-box"}}>
+      <div style={{position: "absolute", left: sh, top: 0, width: 160, height: "100%", background: `linear-gradient(90deg, transparent, ${T.skeletonShine}, transparent)`}} />
     </div>
   );
 };
