@@ -7,6 +7,16 @@ import torch
 from .script import Segment
 
 
+def trim_silence(audio: np.ndarray, sr: int, threshold_db: float = -45.0, pad_ms: int = 60) -> np.ndarray:
+    """Recorta silencio inicial y final del modelo, dejando un margen de pad_ms."""
+    thr = 10 ** (threshold_db / 20)
+    idx = np.where(np.abs(audio) > thr)[0]
+    if idx.size == 0:
+        return audio
+    pad = int(sr * pad_ms / 1000)
+    return audio[max(0, idx[0] - pad): min(len(audio), idx[-1] + pad)]
+
+
 class VoiceEngine:
     def __init__(self, model_dir, device: str = "cpu"):
         import warnings
@@ -36,7 +46,7 @@ class VoiceEngine:
                 torch.manual_seed(seed + i)  # determinista por segmento
             wav = self.model.generate(seg.text, language_id=language, exaggeration=exaggeration,
                                       cfg_weight=cfg_weight, temperature=temperature)
-            audio = wav.squeeze().detach().cpu().numpy().astype(np.float32)
+            audio = trim_silence(wav.squeeze().detach().cpu().numpy().astype(np.float32), self.sr)
             dur = len(audio) / self.sr
             timings.append({"index": i, "text": seg.text, "start": round(cursor, 3),
                             "end": round(cursor + dur, 3)})

@@ -21,6 +21,14 @@ Módulo en `boettcher-voice-studio/` del repositorio. Motor: Chatterbox Multilin
 4. Narración: `synthesize.run(...)` → `out/<nombre>.wav|.mp3`, `.timings.json`, `.srt`. Velocidad con `atempo` (tono preservado, 0,5–2,0).
 5. Remotion: `--remotion-public ../boettcher-videos/public` copia a `public/voice/`. Renderiza con la composición `VoiceOverReel` (`--props` o `defaultProps.narrationName`).
 
+## Narración por escenas (comerciales de duración fija)
+`scenes/<nombre>.json` define escenas con ventana (`start`, `duration`) y texto. El generador ajusta cada escena a su ventana:
+- Acelera hasta 1,2× como máximo (`MAX_SPEED`); si no cabe, falla y lista las escenas que hay que acortar.
+- Recorta silencio del modelo por segmento.
+- Comando: `python -m voice_studio.build_scenes scenes/comercial45.json --remotion-public ../boettcher-videos/public`
+
+Ritmo medido de la voz de referencia: ≈0,6–0,9 s por palabra. Un guion de 45 s debe tener unas 75 palabras como máximo.
+
 ## Comandos
 ```bash
 export VOICE_STUDIO_HOME=/home/user/boettcher-private

@@ -1,0 +1,31 @@
+{
+  "name": "comercial45",
+  "profile": "voz-propia-chilena",
+  "fps": 30,
+  "scenes": [
+    {
+      "id": "s1",
+      "start": 0,
+      "duration": 8,
+      "text": "¿Tienes un departamento en arriendo? Tu arrendatario deja de pagar."
+    },
+    {
+      "id": "s2",
+      "start": 8,
+      "duration": 12,
+      "text": "En Boettcher conocemos esta realidad. Seis meses sin arriendo de quinientos mil pesos: tres millones perdidos. Recuperarla puede requerir demanda y mucho tiempo."
+    },
+    {
+      "id": "s3",
+      "start": 20,
+      "duration": 15,
+      "text": "Por eso en Boettcher Propiedades evaluamos a los arrendatarios, administramos tus pagos y ofrecemos planes con seguro de arriendo que pueden cubrir hasta doce meses de rentas impagas, según las condiciones contratadas."
+    },
+    {
+      "id": "s4",
+      "start": 35,
+      "duration": 10,
+      "text": "No esperes a tener un problema. Boettcher Propiedades: escríbenos hoy."
+    }
+  ]
+}
