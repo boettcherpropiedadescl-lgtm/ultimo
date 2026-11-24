@@ -1,5 +1,5 @@
 import {AbsoluteFill, Audio, interpolate, Sequence, spring, staticFile, useCurrentFrame, useVideoConfig} from "remotion";
-import {CinematicShell} from "./components/CinematicShell";
+import {GlobalBackground} from "./components/GlobalBackground";
 import {HookText} from "./components/HookText";
 import {SafeArea} from "./components/SafeArea";
 import {colors, fontFamily} from "./theme";
@@ -27,9 +27,19 @@ const rev = (f: number, at: number, d = 14) => interpolate(f, [at, at + d], [0, 
 type PhaseProps = {tl: Timeline | null; base: number};
 const useCue = (tl: Timeline | null, base: number) => (id: string) => Math.round((tl?.cues[id] ?? 0) * FPS) - base;
 
-const FadeIn: React.FC<{children: React.ReactNode}> = ({children}) => {
+// Marco de fase: entra deslizando y apareciendo, y sale subiendo y desvaneciéndose. Las fases se solapan
+// sobre un fondo continuo: la fase saliente se desvanece en los OVERLAP fotogramas previos al cue y la siguiente entra en él,
+// sin solaparse ni caer a negro.
+const PhaseFrame: React.FC<{enter: boolean; exit: boolean; children: React.ReactNode}> = ({enter, exit, children}) => {
   const f = useCurrentFrame();
-  return <AbsoluteFill style={{opacity: interpolate(f, [0, OVERLAP], [0, 1], clamp)}}>{children}</AbsoluteFill>;
+  const {durationInFrames: D} = useVideoConfig();
+  const inP = enter ? interpolate(f, [0, OVERLAP], [0, 1], clamp) : 1;
+  const outP = exit ? interpolate(f, [D - OVERLAP, D], [1, 0], clamp) : 1;
+  return (
+    <AbsoluteFill style={{opacity: Math.min(inP, outP), transform: `translateY(${(1 - inP) * 36 - (1 - outP) * 36}px)`}}>
+      {children}
+    </AbsoluteFill>
+  );
 };
 
 const Pill: React.FC<{text: string; at: number; color?: string; size?: number}> = ({text, at, color = colors.copper, size = 36}) => {
@@ -55,7 +65,7 @@ const PhaseA: React.FC<PhaseProps> = ({tl, base}) => {
   const unpaid = rev(f, lc("unpaid"));
   const counter = rev(f, lc("sixmonths"));
   return (
-    <CinematicShell tone="cold">
+    <>
       <SafeArea justify="flex-start">
         <HookText text="¿Tienes un departamento en arriendo?" fontSize={84} startFrame={lc("hook")} />
         <div style={{height: 120, marginTop: 36, opacity: unpaid, transform: `translateY(${(1 - unpaid) * 40}px)`}}>
@@ -91,7 +101,7 @@ const PhaseA: React.FC<PhaseProps> = ({tl, base}) => {
           <Pill text="Mucho tiempo" at={lc("legal") + 28} color={COLD} />
         </div>
       </SafeArea>
-    </CinematicShell>
+    </>
   );
 };
 
@@ -119,7 +129,7 @@ const PhaseB: React.FC<PhaseProps> = ({tl, base}) => {
     {t: "Liquidación puntual", cue: "payout"},
   ];
   return (
-    <CinematicShell tone="warm">
+    <>
       <SafeArea justify="flex-start">
         <HookText text="Administración Boettcher" fontSize={90} highlight={["Boettcher"]} startFrame={lc("brand")} />
         <div style={{display: "flex", gap: 20, marginTop: 40, height: 190}}>
@@ -139,7 +149,7 @@ const PhaseB: React.FC<PhaseProps> = ({tl, base}) => {
           })}
         </div>
       </SafeArea>
-    </CinematicShell>
+    </>
   );
 };
 
@@ -160,7 +170,7 @@ const PhaseC: React.FC<PhaseProps> = ({tl, base}) => {
   const six = rev(f, lc("cover6"), 12);
   const twelve = rev(f, lc("cover12"), 12);
   return (
-    <CinematicShell tone="warm">
+    <>
       <SafeArea justify="flex-start">
         <div style={{display: "flex", alignItems: "center", gap: 26, height: 150}}>
           <Shield p={head} />
@@ -189,7 +199,7 @@ const PhaseC: React.FC<PhaseProps> = ({tl, base}) => {
           Cobertura según plan y condiciones de cada mandato.
         </div>
       </SafeArea>
-    </CinematicShell>
+    </>
   );
 };
 
@@ -203,7 +213,7 @@ const PhaseD: React.FC<PhaseProps> = ({tl, base}) => {
   const btn = spring({frame: f - lc("cta"), fps, config: {damping: 12, stiffness: 150}});
   const pulse = 1 + 0.025 * Math.sin(Math.max(0, f - lc("cta")) / 6) * rev(f, lc("cta") + 20, 10);
   return (
-    <CinematicShell tone="warm">
+    <>
       <SafeArea justify="flex-start">
         <div style={{fontFamily, fontWeight: 700, fontSize: 48, letterSpacing: 4, color: colors.muted, opacity: Math.min(1, price)}}>ADMINISTRACIÓN DESDE</div>
         <div style={{fontFamily, fontWeight: 900, fontSize: 260, color: colors.copperSoft, lineHeight: 1, opacity: Math.min(1, price), transform: `scale(${0.7 + 0.3 * Math.min(1, price)})`, transformOrigin: "left center"}}>
@@ -224,7 +234,7 @@ const PhaseD: React.FC<PhaseProps> = ({tl, base}) => {
           </div>
         </div>
       </SafeArea>
-    </CinematicShell>
+    </>
   );
 };
 
@@ -248,10 +258,19 @@ export const BoettcherComercial60: React.FC<C60Props> = ({timeline}) => {
   const d = c("price");
   return (
     <AbsoluteFill>
-      <Sequence from={0} durationInFrames={a + OVERLAP}><PhaseA tl={timeline} base={0} /></Sequence>
-      <Sequence from={a - OVERLAP} durationInFrames={b - a + 2 * OVERLAP}><FadeIn><PhaseB tl={timeline} base={a - OVERLAP} /></FadeIn></Sequence>
-      <Sequence from={b - OVERLAP} durationInFrames={d - b + 2 * OVERLAP}><FadeIn><PhaseC tl={timeline} base={b - OVERLAP} /></FadeIn></Sequence>
-      <Sequence from={d - OVERLAP} durationInFrames={TOTAL - d + OVERLAP}><FadeIn><PhaseD tl={timeline} base={d - OVERLAP} /></FadeIn></Sequence>
+      <GlobalBackground warmAtFrame={a} />
+      <Sequence from={0} durationInFrames={a}>
+        <PhaseFrame enter={false} exit><PhaseA tl={timeline} base={0} /></PhaseFrame>
+      </Sequence>
+      <Sequence from={a} durationInFrames={b - a}>
+        <PhaseFrame enter exit><PhaseB tl={timeline} base={a} /></PhaseFrame>
+      </Sequence>
+      <Sequence from={b} durationInFrames={d - b}>
+        <PhaseFrame enter exit><PhaseC tl={timeline} base={b} /></PhaseFrame>
+      </Sequence>
+      <Sequence from={d} durationInFrames={TOTAL - d}>
+        <PhaseFrame enter exit={false}><PhaseD tl={timeline} base={d} /></PhaseFrame>
+      </Sequence>
       <Subtitles tl={timeline} />
       <Audio src={staticFile("voice/comercial60.wav")} />
     </AbsoluteFill>
