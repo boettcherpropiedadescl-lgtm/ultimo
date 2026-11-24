@@ -1,0 +1,31 @@
+{
+  "prompt": "Boettcher Propiedades, arrendatarios, Plan Protección Total, Dicom, IPC, UF.",
+  "script": "¿Tienes un departamento en arriendo? Entonces presta atención, ¿por qué esto te puede pasar? Imagínate que tu arrendatario deja de pagar, pasa un mes, después otro, y tu departamento sigue ocupado. Si recibías 500 mil pesos mensuales, en 6 meses dejaste de percibir 3 millones de pesos. Y el problema puede ser mayor: gastos comunes, cuentas impagas, abogados, notificaciones judiciales y un proceso que puede extenderse mientras sigues sin recibir tu dinero. En Boettcher Propiedades conocemos estos problemas. Por eso evaluamos a los arrendatarios, administramos los pagos y asignamos un corredor exclusivo a tu propiedad. Tenemos administración desde el 6 % mensual, un plan con cobertura de hasta 6 meses de renta impaga, y nuestro Plan Protección Total, con cobertura de hasta 12 meses, respaldo legal, cuentas básicas y daños, según las condiciones contratadas. No esperes a tener un problema para proteger lo que tanto te costó conseguir. Boettcher Propiedades. Tu inversión merece respaldo. Solicita hoy tu evaluación gratuita.",
+  "cues": [
+    {"id": "hook", "phrase": "tienes un departamento"},
+    {"id": "unpaid", "phrase": "deja de pagar"},
+    {"id": "months", "phrase": "pasa un mes"},
+    {"id": "sixmonths", "phrase": "en 6 meses"},
+    {"id": "loss", "phrase": "3 millones"},
+    {"id": "more", "phrase": "problema puede ser mayor"},
+    {"id": "common", "phrase": "gastos comunes"},
+    {"id": "bills", "phrase": "cuentas impagas"},
+    {"id": "lawyers", "phrase": "abogados"},
+    {"id": "notices", "phrase": "notificaciones judiciales"},
+    {"id": "brand", "phrase": "boettcher"},
+    {"id": "eval", "phrase": "evaluamos"},
+    {"id": "pay", "phrase": "administramos"},
+    {"id": "broker", "phrase": "corredor exclusivo"},
+    {"id": "price", "phrase": "desde el 6"},
+    {"id": "plan12", "phrase": "hasta 6 meses"},
+    {"id": "plan15", "phrase": "protección total"},
+    {"id": "cover12", "phrase": "hasta 12 meses"},
+    {"id": "legal", "phrase": "respaldo legal"},
+    {"id": "basic", "phrase": "cuentas básicas"},
+    {"id": "damage", "phrase": "daños"},
+    {"id": "terms", "phrase": "condiciones contratadas"},
+    {"id": "wait", "phrase": "no esperes"},
+    {"id": "invest", "phrase": "inversión merece"},
+    {"id": "cta", "phrase": "solicita hoy"}
+  ]
+}

@@ -34,6 +34,12 @@ Ritmo medido de la voz de referencia: ≈0,6–0,9 s por palabra. Un guion de 45
 genera voz sin relleno, comprime pausas largas a ≈0,14 s, alinea el guion palabra a palabra con reconocimiento local y escribe `public/voice/<nombre>.timeline.json` (`cues`, `subtitles`). La composición `BoettcherComercial60` usa esos cues. `--reuse-wav` repite solo compresión y alineación.
 Datos comerciales: solo los de boettcher.cl/administracion-de-propiedades/ (planes 6/12/15 %, seguro hasta 6 y 12 meses según plan, Ley 21.461, +15 años, +2.000 propiedades).
 
+## Locución real entregada por el cliente (sin síntesis)
+Si el cliente entrega su propia grabación (p. ej. `.mov` con video negro y solo audio), úsala tal cual: extrae el audio sin filtros (`ffmpeg -vn -c:a pcm_s16le -ar 48000`), escribe `scenes/<nombre>.json` con el guion y los cues, y alinea con `python -m voice_studio.align_audio audio.wav scenes/<nombre>.json salida.timeline.json`. La composición `BoettcherComercialFinal` lee `public/voice/comercial-final.timeline.json` y `comercial-final.wav`. No se clona ni se procesa la voz.
+
+## Regla anti-parpadeo en Remotion
+No uses `filter: blur()` ni `rotateX`/`perspective` por palabra: Chrome puede ocultar una palabra durante un fotograma. Usa `components/StableText` (solo opacidad y desplazamiento, estilo vacío al terminar) y aplica transform/opacity únicamente mientras algo se mueve.
+
 ## Comandos
 ```bash
 export VOICE_STUDIO_HOME=/home/user/boettcher-private

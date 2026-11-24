@@ -12,10 +12,11 @@ def norm(word: str) -> str:
     return re.sub(r"[^a-z0-9]+", "", t)
 
 
-def asr_words(wav_path, model_size: str = "small") -> list[tuple[str, float, float]]:
+def asr_words(wav_path, model_size: str = "small", initial_prompt: str | None = None) -> list[tuple[str, float, float]]:
     from faster_whisper import WhisperModel
     model = WhisperModel(model_size, device="cpu", compute_type="int8")
-    segments, _ = model.transcribe(str(wav_path), language="es", word_timestamps=True, beam_size=5)
+    segments, _ = model.transcribe(str(wav_path), language="es", word_timestamps=True, beam_size=5,
+                                   initial_prompt=initial_prompt)
     return [(w.word.strip(), float(w.start), float(w.end)) for s in segments for w in s.words]
 
 
@@ -90,7 +91,7 @@ def subtitle_chunks(script_words: list[str], times, max_words: int = 8, max_char
                 if script_words[k][-1] in ".?!":
                     break
                 k += 1
-            if left <= 1 and len(text) + 1 + len(nxt) <= max_chars + 16:
+            if left <= 2 and len(text) + 1 + len(nxt) <= max_chars + 22:
                 overflow = False  # evita un subtítulo huérfano de una sola palabra
         if strong or weak or overflow:
             chunks.append(cur)
