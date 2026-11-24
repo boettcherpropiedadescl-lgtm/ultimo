@@ -43,6 +43,9 @@ No uses `filter: blur()` ni `rotateX`/`perspective` por palabra: Chrome puede oc
 ## Estilo de montaje "dinámico" (composición BoettcherComercialDinamico)
 Inspirado en reels de tutoriales: cada escena es una tarjeta tipo interfaz que entra con rebote y sale mientras entra la siguiente; cursor que hace clic, interruptores, contadores, esqueletos de carga, confeti y subtítulos palabra por palabra (usa `words` del timeline). Piezas en `src/components/ui/Kit.tsx`. Para mantener la atención hay movimiento permanente sin tocar el texto con filtros: destello en tarjetas, brasas, empuje de cámara lento por escena. Mide siempre: fotogramas sin cambio = 0, sin bandas negras, sin picos aislados en titulares/subtítulos. No copiar mascotas, logos ni material de terceros del video de referencia.
 
+## Comercial «cambia de administración» (BoettcherComercialCambio)
+Guion y cues en `scenes/cambio_admin.json` (`beats` para la voz, `display_script` con cifras para subtítulos, `cues`). Narración provisional: `python -m voice_studio.build_narration scenes/cambio_admin.json --remotion-public ../boettcher-videos/public`. **Para usar la voz final del cliente**: extraer su audio a `public/voice/cambio-admin.wav` y regenerar `cambio-admin.timeline.json` con `python -m voice_studio.align_audio audio.wav scenes/cambio_admin.json public/voice/cambio-admin.timeline.json`; la composición se reajusta sola. No afirmar porcentajes de cartera que el cliente no haya entregado.
+
 ## Comandos
 ```bash
 export VOICE_STUDIO_HOME=/home/user/boettcher-private

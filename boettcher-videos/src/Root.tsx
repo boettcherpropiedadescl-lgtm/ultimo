@@ -6,6 +6,7 @@ import {BoettcherComercial45, calculateComercialMetadata, comercialDefaults} fro
 import {BoettcherComercial60, calculateComercial60Metadata, comercial60Defaults} from "./BoettcherComercial60";
 import {BoettcherComercialFinal, calculateFinalMetadata, finalDefaults} from "./BoettcherComercialFinal";
 import {BoettcherComercialDinamico, calculateDinamicoMetadata, dinamicoDefaults} from "./BoettcherComercialDinamico";
+import {BoettcherComercialCambio, calculateCambioMetadata, cambioDefaults} from "./BoettcherComercialCambio";
 
 export const RemotionRoot: React.FC = () => {
   return (
@@ -68,6 +69,16 @@ export const RemotionRoot: React.FC = () => {
         height={1920}
         defaultProps={dinamicoDefaults}
         calculateMetadata={calculateDinamicoMetadata}
+      />
+      <Composition
+        id="BoettcherComercialCambio"
+        component={BoettcherComercialCambio}
+        durationInFrames={1800}
+        fps={30}
+        width={1080}
+        height={1920}
+        defaultProps={cambioDefaults}
+        calculateMetadata={calculateCambioMetadata}
       />
     </>
   );

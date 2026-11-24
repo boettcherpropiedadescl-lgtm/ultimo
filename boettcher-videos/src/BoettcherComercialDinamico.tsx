@@ -26,10 +26,10 @@ const ALERT = "#e0705a";
 const STAGE = {left: 84, top: 300, width: 912, height: 990};
 const MESSAGE = "Hola Boettcher Propiedades, estoy interesado en el servicio de administración de propiedades";
 
-type SP = {lc: (id: string) => number};
+export type SP = {lc: (id: string) => number};
 
 // ───────── Marco de escena: entra con rebote (escala + desplazamiento) y sale subiendo mientras entra la siguiente.
-const SceneFrame: React.FC<{first?: boolean; last?: boolean; children: React.ReactNode}> = ({first, last, children}) => {
+export const SceneFrame: React.FC<{first?: boolean; last?: boolean; children: React.ReactNode}> = ({first, last, children}) => {
   const f = useCurrentFrame();
   const {fps, durationInFrames: D} = useVideoConfig();
   const p = first ? 1 : spring({frame: f, fps, config: {damping: 12, stiffness: 150, mass: 0.7}});
@@ -372,9 +372,8 @@ const S7: React.FC<SP> = ({lc}) => {
 };
 
 // ───────── Guía de avance (como los "PASO 1/2/3" del reel de referencia): 4 etapas con barra que se llena.
-const Chips: React.FC<{marks: number[]; total: number}> = ({marks, total}) => {
+export const Chips: React.FC<{marks: number[]; total: number; labels?: string[]}> = ({marks, total, labels = ["PROBLEMA", "SOLUCIÓN", "PLANES", "CONTACTO"]}) => {
   const f = useCurrentFrame();
-  const labels = ["PROBLEMA", "SOLUCIÓN", "PLANES", "CONTACTO"];
   return (
     <div style={{position: "absolute", left: 84, right: 84, top: 214, display: "flex", gap: 10}}>
       {labels.map((l, i) => {
@@ -393,7 +392,7 @@ const Chips: React.FC<{marks: number[]; total: number}> = ({marks, total}) => {
   );
 };
 
-const TopLogo: React.FC<{hideAt: number}> = ({hideAt}) => {
+export const TopLogo: React.FC<{hideAt: number}> = ({hideAt}) => {
   const f = useCurrentFrame();
   const o = Math.min(interpolate(f, [0, 14], [0, 1], clamp), interpolate(f, [hideAt - 10, hideAt + 4], [1, 0], clamp));
   if (o <= 0) return null;
@@ -406,9 +405,9 @@ const TopLogo: React.FC<{hideAt: number}> = ({hideAt}) => {
 
 // ───────── Subtítulos palabra por palabra: cada palabra aparece cuando se dice; la actual va en cobre; las clave, resaltadas.
 const norm = (w: string) => w.toLowerCase().normalize("NFD").replace(/[̀-ͯ]/g, "").replace(/[^a-z0-9]/g, "");
-const KEYWORDS = new Set(["pagar", "millones", "abogados", "boettcher", "exclusivo", "proteccion", "respaldo", "gratuita", "problema", "6", "12", "mensual"]);
+export const KEYWORDS = new Set(["pagar", "millones", "abogados", "boettcher", "exclusivo", "proteccion", "respaldo", "gratuita", "problema", "6", "12", "mensual"]);
 
-const Captions: React.FC<{tl: Timeline | null}> = ({tl}) => {
+export const Captions: React.FC<{tl: Timeline | null; keywords?: Set<string>}> = ({tl, keywords = KEYWORDS}) => {
   const f = useCurrentFrame();
   const t = f / FPS;
   const chunks = useMemo(() => {
@@ -430,7 +429,7 @@ const Captions: React.FC<{tl: Timeline | null}> = ({tl}) => {
         const spoken = t >= w.start;
         const next = words[i + 1]?.start ?? active.end;
         const current = spoken && t < next;
-        const key = KEYWORDS.has(norm(w.w));
+        const key = keywords.has(norm(w.w));
         return (
           <span key={i} style={{opacity: spoken ? 1 : 0, color: current ? colors.copper : key ? colors.copperSoft : colors.white}}>{w.w + " "}</span>
         );

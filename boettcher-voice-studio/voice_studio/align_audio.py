@@ -17,7 +17,7 @@ def main() -> None:
     spec = json.loads(spec_path.read_text(encoding="utf-8"))
     info = sf.info(str(audio_path))
     duration = info.frames / info.samplerate
-    words = spec["script"].split()
+    words = (spec.get("script") or spec["display_script"]).split()
     asr = align.asr_words(audio_path, initial_prompt=spec.get("prompt"))
     times = align.align_script(words, asr, duration)
     matched = sum(1 for w, a in zip(words, asr) if align.norm(w) == align.norm(a[0]))

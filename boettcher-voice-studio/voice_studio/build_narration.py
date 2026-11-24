@@ -59,7 +59,7 @@ def main() -> None:
     sf.write(wav, audio_arr, sr, subtype="PCM_16")
     beats_report = [{"beat": i, "text": t["text"]} for i, t in enumerate(timings)]
 
-    script_words = " ".join(spec["beats"]).split()
+    script_words = (spec.get("display_script") or " ".join(spec["beats"])).split()
     result = {"voice": spec["profile"], "duration_s": round(total, 3), "speed": round(speed, 3), "beats": beats_report}
     if not a.skip_align:
         asr = align.asr_words(wav)

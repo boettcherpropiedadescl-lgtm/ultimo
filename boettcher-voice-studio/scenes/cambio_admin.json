@@ -1,0 +1,141 @@
+{
+  "name": "cambio-admin",
+  "profile": "voz-propia-chilena",
+  "target_s": 58.0,
+  "pause_ms": 120,
+  "max_speed": 1.22,
+  "exaggeration": 0.45,
+  "beats": [
+    "¿Tu administración de propiedades no te responde? Llamas, escribes y nadie contesta.",
+    "Pagos que llegan tarde, cobros que nadie te explica y un ejecutivo distinto cada vez que llamas. Mereces respuestas, no excusas.",
+    "Cambiarte es más simple de lo que crees. En Boettcher Propiedades llevamos más de quince años y administramos más de dos mil propiedades.",
+    "Tendrás un corredor exclusivo, trato directo, sin bots ni call centers.",
+    "Plataforma online para ver tus pagos, contratos y gastos comunes cuando quieras.",
+    "Liquidación puntual cada mes, y planes con seguro de arriendo de hasta doce meses y defensa legal, según el plan contratado.",
+    "Escríbenos, revisamos tu caso y te acompañamos en todo el cambio. Desde un seis por ciento mensual, sin IVA.",
+    "No sigas esperando una respuesta. Cotiza hoy en menos de un minuto. Boettcher Propiedades: tu inversión merece respaldo."
+  ],
+  "display_script": "¿Tu administración de propiedades no te responde? Llamas, escribes y nadie contesta. Pagos que llegan tarde, cobros que nadie te explica y un ejecutivo distinto cada vez que llamas. Mereces respuestas, no excusas. Cambiarte es más simple de lo que crees. En Boettcher Propiedades llevamos más de 15 años y administramos más de 2 mil propiedades. Tendrás un corredor exclusivo, trato directo, sin bots ni call centers. Plataforma online para ver tus pagos, contratos y gastos comunes cuando quieras. Liquidación puntual cada mes, y planes con seguro de arriendo de hasta 12 meses y defensa legal, según el plan contratado. Escríbenos, revisamos tu caso y te acompañamos en todo el cambio. Desde un 6 % mensual, sin IVA. No sigas esperando una respuesta. Cotiza hoy en menos de un minuto. Boettcher Propiedades: tu inversión merece respaldo.",
+  "cues": [
+    {
+      "id": "hook",
+      "phrase": "tu administración"
+    },
+    {
+      "id": "silence",
+      "phrase": "nadie contesta"
+    },
+    {
+      "id": "late",
+      "phrase": "llegan tarde"
+    },
+    {
+      "id": "fees",
+      "phrase": "cobros que"
+    },
+    {
+      "id": "exec",
+      "phrase": "ejecutivo distinto"
+    },
+    {
+      "id": "deserve",
+      "phrase": "mereces respuestas"
+    },
+    {
+      "id": "excuses",
+      "phrase": "no excusas"
+    },
+    {
+      "id": "change",
+      "phrase": "cambiarte"
+    },
+    {
+      "id": "brand",
+      "phrase": "en boettcher"
+    },
+    {
+      "id": "years",
+      "phrase": "15 años"
+    },
+    {
+      "id": "props",
+      "phrase": "2 mil"
+    },
+    {
+      "id": "broker",
+      "phrase": "corredor exclusivo"
+    },
+    {
+      "id": "direct",
+      "phrase": "trato directo"
+    },
+    {
+      "id": "nobots",
+      "phrase": "sin bots"
+    },
+    {
+      "id": "platform",
+      "phrase": "plataforma online"
+    },
+    {
+      "id": "mypay",
+      "phrase": "tus pagos"
+    },
+    {
+      "id": "common",
+      "phrase": "gastos comunes"
+    },
+    {
+      "id": "payout",
+      "phrase": "liquidación puntual"
+    },
+    {
+      "id": "insurance",
+      "phrase": "seguro de arriendo"
+    },
+    {
+      "id": "cover12",
+      "phrase": "hasta 12 meses"
+    },
+    {
+      "id": "legal",
+      "phrase": "defensa legal"
+    },
+    {
+      "id": "terms",
+      "phrase": "plan contratado"
+    },
+    {
+      "id": "write",
+      "phrase": "escríbenos"
+    },
+    {
+      "id": "review",
+      "phrase": "revisamos tu caso"
+    },
+    {
+      "id": "accompany",
+      "phrase": "te acompañamos"
+    },
+    {
+      "id": "price",
+      "phrase": "desde un 6"
+    },
+    {
+      "id": "noiva",
+      "phrase": "sin iva"
+    },
+    {
+      "id": "wait",
+      "phrase": "no sigas esperando"
+    },
+    {
+      "id": "quote",
+      "phrase": "cotiza hoy"
+    },
+    {
+      "id": "invest",
+      "phrase": "inversión merece"
+    }
+  ]
+}
