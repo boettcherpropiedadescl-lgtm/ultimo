@@ -1,0 +1,8 @@
+{
+  "rent": 500000,
+  "firstAlertFrame": 75,
+  "unpaidMonthsFrames": [123, 180, 243],
+  "headline": "¿Quién pone el millón y medio?",
+  "openingLabel": "Si tu arrendatario deja de pagar",
+  "exampleLabel": "Ejemplo de rentas no percibidas"
+}
