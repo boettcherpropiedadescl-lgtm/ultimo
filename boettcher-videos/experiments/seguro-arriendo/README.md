@@ -6,12 +6,16 @@ Prueba editorial de 10 segundos, vertical a 1080 × 1920 y 30 fps. La composici�
 
 | Componente | Estado |
 | --- | --- |
-| Paquete Viral Intelligence v1.0 | El enlace de Drive entregó un archivo HTML guardado de ChatGPT. Falta el ZIP original con README, código, nueva skill y adaptador. |
+| Paquete Viral Intelligence v1.0 | Aplicación y skill instaladas. Probadas la biblioteca SQLite, la generación local, la navegación del storyboard y las exportaciones TXT y JSON. |
 | Boettcher Motion Studio y Voice Studio | Presentes en la rama de origen bajo `.claude/skills/`. |
-| Boettcher Viral Script Engine | La skill no está en el árbol de la rama de origen disponible. |
-| SearXNG | `GET https://search.boettcher.cl/search?q=Boettcher&format=json` respondió HTTP 404 y HTML con el título “Boettcher SEO Search”. La raíz también respondió HTTP 404. Falta confirmar la URL base o el prefijo configurado. |
-| Ollama | No se encontró el ejecutable ni un servicio local en `127.0.0.1:11434/api/tags`. |
-| Remotion | La prueba usa un JSON propio. La compatibilidad con los JSON generados por Viral Intelligence queda pendiente de verificar con su adaptador original. |
+| Boettcher Viral Script Engine | Pendiente de instalar. La skill no estaba en el ZIP ni en la rama de origen. |
+| SearXNG | La ruta JSON configurada devolvió HTTP 404. La integración HTTP se comprobó por separado con un simulador local. |
+| Ollama | El servicio local no estaba disponible en `127.0.0.1:11434`. La generación se probó con la plantilla incluida y la integración se comprobó con un simulador local. |
+| Remotion | El adaptador `BoettcherIntelligenceReel` abrió dos JSON de la aplicación (20 y 45 segundos), aceptó el formato original con `theme` y produjo un MP4 de prueba de 10 segundos con el JSON exportado desde el navegador. La prueba editorial conserva su punto de entrada separado. |
+
+[Inicio de la aplicación](../../../boettcher-viral-intelligence/README.md) · [Storyboard revisado en JSON](../../../boettcher-viral-intelligence/examples/seguro-arriendo-45.json)
+
+Pasaron siete pruebas de Python, el flujo de exportación en Chromium, TypeScript y el análisis de código de la integración. El análisis global reporta tres errores `@remotion/from-0` en los comerciales existentes `BoettcherComercial45`, `BoettcherComercial60` y `BoettcherComercialFinal`.
 
 ## Referencias públicas
 
@@ -50,6 +54,8 @@ La primera referencia abre con el problema y explica quién gestiona la cobranza
 > Comenta «PROTECCIÓN» y te contamos qué plan calza con tu propiedad.
 
 Fuente comercial [Planes de administración de Boettcher Propiedades](https://boettcher.cl/administracion-de-propiedades/). La suma de renta impaga es un ejemplo aritmético. La cobertura de hasta doce meses corresponde a la renta impaga. Las demás coberturas tienen sus propias condiciones en el mandato.
+
+La tabla de administración que se usó en el guion publica hasta seis meses para el Plan Garantizado del 12%. Otra página de Boettcher indica hasta doce meses para ese porcentaje. Conviene confirmar el mandato vigente antes de publicar esa comparación. [Tabla de administración](https://boettcher.cl/administracion-de-propiedades/) · [Página de coberturas](https://boettcher.cl/que-cubre-la-administracion-de-propiedades/)
 
 ## Storyboard
 

@@ -7,10 +7,21 @@ import {BoettcherComercial60, calculateComercial60Metadata, comercial60Defaults}
 import {BoettcherComercialFinal, calculateFinalMetadata, finalDefaults} from "./BoettcherComercialFinal";
 import {BoettcherComercialDinamico, calculateDinamicoMetadata, dinamicoDefaults} from "./BoettcherComercialDinamico";
 import {BoettcherComercialCambio, calculateCambioMetadata, cambioDefaults} from "./BoettcherComercialCambio";
+import {BoettcherIntelligenceReel, calculateIntelligenceMetadata, defaultIntelligenceProps, intelligenceFps} from "./BoettcherIntelligenceReel";
 
 export const RemotionRoot: React.FC = () => {
   return (
     <>
+      <Composition
+        id="BoettcherIntelligenceReel"
+        component={BoettcherIntelligenceReel}
+        durationInFrames={1350}
+        fps={intelligenceFps}
+        width={1080}
+        height={1920}
+        defaultProps={defaultIntelligenceProps}
+        calculateMetadata={calculateIntelligenceMetadata}
+      />
       <Composition
         id="BoettcherReel"
         component={BoettcherReel}

@@ -5,6 +5,7 @@
  * All configuration options: https://remotion.dev/docs/config
  */
 
+import { existsSync } from "node:fs";
 import { Config } from "@remotion/cli/config";
 
 Config.setRspack(true);
@@ -12,5 +13,7 @@ Config.setVideoImageFormat("jpeg");
 Config.setOverwriteOutput(true);
 Config.setDefaultPremountInSeconds(2);
 
-// Chrome local del sistema: evita descargar el navegador de Remotion (remotion.media) en este entorno.
-Config.setBrowserExecutable("/usr/bin/google-chrome");
+const systemChrome = ["/usr/bin/google-chrome", "/usr/bin/chromium"].find((path) => existsSync(path));
+if (systemChrome) {
+  Config.setBrowserExecutable(systemChrome);
+}

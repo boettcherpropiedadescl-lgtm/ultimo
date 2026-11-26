@@ -1,0 +1,76 @@
+{
+  "topic": "Los riesgos de arrendar un departamento sin seguro de arriendo en Chile",
+  "format": "1080x1920 30fps",
+  "duration": 45,
+  "style": "finance-counter",
+  "quality": {
+    "safe_margin_horizontal_px": 90,
+    "safe_top_px": 250,
+    "safe_bottom_px": 340,
+    "audio_integrated_lufs": -16,
+    "true_peak_db": -1
+  },
+  "script": "Si tu arrendatario deja de pagar tres meses, ¿quién pone el millón y medio? Mira este ejemplo. Si el arriendo es de quinientos mil pesos, tres meses impagos suman un millón y medio de renta que dejas de recibir.\n\nEl costo puede aumentar si quedan cuentas pendientes o daños. Antes de entregar las llaves, evalúa al arrendatario, revisa el contrato y define qué respaldo quieres tener.\n\nEn Boettcher Propiedades, el Plan Garantizado contempla hasta seis meses de renta impaga. Protección Total contempla hasta doce meses, además de cobertura de cuentas básicas, daños y representación judicial, según el mandato.\n\nComenta «PROTECCIÓN» y te contamos qué plan calza con tu propiedad.",
+  "chapters": [
+    {
+      "name": "Gancho",
+      "start": 0,
+      "end": 3,
+      "headline": "¿Y si dejan de pagarte el arriendo?",
+      "visual": "Tres meses sin pago."
+    },
+    {
+      "name": "Costo",
+      "start": 3,
+      "end": 10,
+      "headline": "Tres arriendos, una sola pérdida",
+      "visual": "Ejemplo de rentas no percibidas.",
+      "example": {
+        "months": 3,
+        "monthlyRent": 500000
+      }
+    },
+    {
+      "name": "Consecuencia",
+      "start": 10,
+      "end": 17,
+      "headline": "El costo puede seguir subiendo",
+      "visual": "Cuentas pendientes y daños al inmueble.",
+      "items": [
+        "Cuentas pendientes",
+        "Daños al inmueble"
+      ]
+    },
+    {
+      "name": "Preparación",
+      "start": 17,
+      "end": 25,
+      "headline": "Antes de entregar las llaves",
+      "visual": "Revisa el respaldo que quieres contratar.",
+      "items": [
+        "Evalúa al arrendatario",
+        "Revisa el contrato",
+        "Define el respaldo"
+      ]
+    },
+    {
+      "name": "Solución",
+      "start": 25,
+      "end": 39,
+      "headline": "Dos planes con cobertura de arriendo",
+      "visual": "Sujeto a las condiciones de cada mandato.",
+      "items": [
+        "Plan Garantizado · hasta 6 meses",
+        "Protección Total · hasta 12 meses",
+        "Protección Total · cuentas básicas, daños y representación judicial"
+      ]
+    },
+    {
+      "name": "Cierre",
+      "start": 39,
+      "end": 45,
+      "headline": "Comenta «PROTECCIÓN»",
+      "visual": "Te contamos qué plan calza con tu propiedad."
+    }
+  ]
+}
