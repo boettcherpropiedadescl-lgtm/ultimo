@@ -1,0 +1,57 @@
+{
+  "topic": "Los riesgos de arrendar sin seguro de arriendo en Chile",
+  "duration": 45,
+  "format": "1080x1920 30fps",
+  "style": "finance-counter",
+  "script": "El arriendo no llegó. El dividendo vence igual. Si cuentas con esa plata para cubrir tus gastos, un atraso ya te cambia el presupuesto.\n\nY el problema puede ir más allá de la renta. Si quedan cuentas impagas o daños, sube el costo. Cobrar y recuperar el departamento puede requerir gestiones judiciales.\n\nAntes de entregar las llaves, revisa qué cubre el respaldo, cuándo se activa y quién se encarga del cobro.\n\nEn Boettcher Propiedades administramos tu arriendo. Según el plan, puedes tener cobertura de rentas impagas, cuentas básicas y daños, además de respaldo legal.\n\n¿Quieres comparar tus opciones? Comenta «ARRIENDO» y hablemos.",
+  "chapters": [
+    {
+      "name": "Gancho",
+      "start": 0,
+      "end": 4,
+      "headline": "El arriendo no llegó. El dividendo vence igual.",
+      "visual": "Dos trayectos de presupuesto marcan ingreso y gasto.",
+      "movement": "El ingreso se detiene. El gasto alcanza el vencimiento."
+    },
+    {
+      "name": "Consecuencia",
+      "start": 4,
+      "end": 10,
+      "headline": "El presupuesto cambia.",
+      "visual": "Un corchete señala la diferencia entre los trayectos.",
+      "movement": "Se dibuja la brecha y aparece una pregunta en pantalla."
+    },
+    {
+      "name": "Costo",
+      "start": 10,
+      "end": 21,
+      "headline": "El costo puede subir.",
+      "visual": "Cuentas, reparaciones y documento de cobranza.",
+      "movement": "Tres fichas nacen de los trayectos y se ordenan alrededor del contrato."
+    },
+    {
+      "name": "Preparación",
+      "start": 21,
+      "end": 30,
+      "headline": "Antes de entregar las llaves.",
+      "visual": "Una llave activa las preguntas sobre cobertura, activación y cobro.",
+      "movement": "Los dientes de la llave señalan cada pregunta por separado."
+    },
+    {
+      "name": "Solución",
+      "start": 30,
+      "end": 40,
+      "headline": "Administración con respaldo.",
+      "visual": "Las fichas de cobertura se agrupan bajo las condiciones del mandato.",
+      "movement": "Entra cada beneficio al ritmo de la frase que lo menciona."
+    },
+    {
+      "name": "Cierre",
+      "start": 40,
+      "end": 45,
+      "headline": "Comenta «ARRIENDO».",
+      "visual": "La llave, los trayectos y la marca se reagrupan.",
+      "movement": "El foco pasa del módulo de administración al llamado a comentar."
+    }
+  ]
+}

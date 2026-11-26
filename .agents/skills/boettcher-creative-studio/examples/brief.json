@@ -1,0 +1,13 @@
+{
+  "objetivo": "captar propietarios interesados en administración de arriendo",
+  "tema": "riesgo de no pago y planes de protección de arriendo",
+  "audiencia": "propietario chileno con departamento arrendado",
+  "duracion_objetivo_segundos": 45,
+  "formato": "1080x1920",
+  "idioma": "es-CL",
+  "estilo": "historia humana con interfaz animada y cifras verificadas",
+  "voz": "archivo autorizado del cliente o narración original",
+  "fuente_comercial": "https://boettcher.cl/administracion-de-propiedades/",
+  "referencias": [],
+  "restricciones": ["no copiar material ajeno", "no inventar cifras", "sin transiciones repetidas tipo diapositiva"]
+}

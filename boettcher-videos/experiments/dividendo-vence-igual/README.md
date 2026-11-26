@@ -1,5 +1,7 @@
 # Piloto · El dividendo vence igual
 
+[Investigación](research.md) · [Rúbrica de ganchos](hooks.md) · [Storyboard JSON](storyboard.json) · [Recursos](assets-rights.md) · [Control de calidad](qa.md)
+
 ## Investigación y criterio editorial
 
 - La Ley 21.461 establece un procedimiento monitorio para cobrar rentas de arrendamiento y pedir la restitución del inmueble. Su tramitación depende del caso. El guion evita prometer fechas de restitución o recuperación del dinero. [Biblioteca del Congreso Nacional](https://www.bcn.cl/leychile/navegar?idNorma=1178004)
@@ -50,7 +52,8 @@ Si el pago del arriendo se atrasa y el dividendo vence, tu presupuesto cambia. A
 | Ollama | El servicio local no respondió en el puerto 11434. |
 | Voice Studio | Pasaron las cuatro pruebas incluidas de segmentación, formato SRT y autorización. Los pesos del modelo y el directorio configurado de perfiles no estaban disponibles en este entorno. El piloto usa diseño sonoro y texto. |
 | Motion Studio | El piloto tiene su propia entrada Remotion. Pasaron TypeScript y el análisis del código nuevo. |
-| Creative Studio y Viral Script Engine | No aparecieron en los adjuntos, el catálogo consultado ni el historial del repositorio. Su instalación y sus pruebas específicas quedan pendientes. |
+| Creative Studio | Instalada como skill principal. Pasaron las cinco pruebas del ZIP y las siete del runtime compartido. El paquete trae estructura, ejemplos y rúbrica para la revisión editorial. |
+| Viral Script Engine | El ZIP no trae una copia independiente de la skill. La revisión editorial del piloto usa la estructura y la rúbrica de Creative Studio. |
 
 ## Reproducir el piloto
 
